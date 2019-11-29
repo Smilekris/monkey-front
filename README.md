@@ -2,6 +2,13 @@
 
 > A Vue.js project
 
+# init the proejct
+
+follow the guide
+1.git init 
+2.git git remote add origin https://github.com/Smilekris/monkey-front.git
+3.git pull origin master
+
 ## Build Setup
 
 ``` bash
