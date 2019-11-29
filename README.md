@@ -5,9 +5,9 @@
 # init the proejct
 
 follow the guide
-1.git init 
-2.git git remote add origin https://github.com/Smilekris/monkey-front.git
-3.git pull origin master
+1.git init \n
+2.git remote add origin https://github.com/Smilekris/monkey-front.git \n
+3.git pull origin master \n
 
 ## Build Setup
 
