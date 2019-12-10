@@ -8,11 +8,13 @@
     <el-menu-item index="2-2">big素材</el-menu-item>
     <el-menu-item index="2-3">big论坛</el-menu-item>
   </el-submenu>
-  <el-menu-item index="3"><a href="https://www.ele.me" target="_blank">订单管理</a></el-menu-item>
+  <!-- <el-menu-item index="3"><a href="https://www.ele.me" target="_blank">订单管理</a></el-menu-item> -->
 </el-menu>
 <div id="app">
+  <div style="text-align:right; margin: 5px">{{surfing}},{{paperViews}}</div>
   <p id="headercenter">{{msg}}{{menu}}</p>
   </div>
+   <el-button type="primary" @click="getRandomMenus" style="display:block;margin:0 auto" :disabled="pickUpBol">抽奖</el-button>
   </div>
 </template>
 
@@ -30,11 +32,16 @@ export default {
       menus: [],
       menu: '什么',
       count: 0,
-      timer: ''
+      timer: '',
+      pickUpBol: false,
+      surfing: '',
+      paperViews: ''
     }
   },
   created () {
-    this.getRandomMenus()
+    this.getSurfing()
+    this.getPaperViews()
+    // this.getRandomMenus()
     // this.menu = setInterval(this.menus.get(), 1000)
   },
   mounted () {
@@ -43,19 +50,35 @@ export default {
     handleSelect (key, keyPath) {
       console.log(key, keyPath)
     },
+    getSurfing () {
+      var url = 'http://kris0806.cn/monkey/statistics/surf'
+      axios.get(url).then(res => {
+        this.surfing = res.data.result
+      })
+    },
+    getPaperViews () {
+      var url = 'http://kris0806.cn/monkey/statistics/sum'
+      axios.get(url).then(res => {
+        this.paperViews = res.data.result
+      })
+    },
     getRandomMenus () {
       var url = 'http://kris0806.cn/monkey/statistics/random-menus'
+      if (this.pickUpBol === true) {
+        return
+      }
       axios.get(url).then(res => {
+        this.pickUpBol = true
         this.menus = res.data.result
-        console.log('a' + this.menus[0].menuName)
         this.timer = setInterval(this.setMenuName, 200)
       })
     },
     setMenuName () {
-      debugger
       this.menu = this.menus[this.count].menuName
       this.count += 1
       if (this.count === this.menus.length) {
+        this.count = 0
+        this.pickUpBol = false
         clearInterval(this.timer)
       }
     }
