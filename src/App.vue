@@ -15,6 +15,7 @@
   <p id="headercenter">{{msg}}{{menu}}</p>
   </div>
    <el-button type="primary" @click="getRandomMenus" style="display:block;margin:0 auto" :disabled="pickUpBol">抽奖</el-button>
+  <div class="footer">{{copyRight}}</div>
   </div>
 </template>
 
@@ -25,6 +26,7 @@ export default {
   data () {
     return {
       msg: '今晚big',
+      copyRight: '客服热线: 0750-0123456789  Copyright © 2019-2020 Big兄弟 All Rights Reserved',
       watchingMsg: 'default msg',
       sum: '',
       activeIndex: '1',
@@ -99,6 +101,21 @@ export default {
   margin: 50px;
   font: "PingFang SC";
   font-size: 25px;
+}
+.footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+      width: 100%;
+    min-width: 1000px;
+    padding: 20px 0;
+    margin-top: 20px;
+    color: #666666;
+    font-size: 12px;
+    line-height: 30px;
+    text-align: center;
+    border-top: 1px solid #DDDDDD;
 }
   .app-main {
     width: 100%;
